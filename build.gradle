@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+	maven { 
+		url "https://plugins.gradle.org/m2" 
+	}
+	jcenter()
+}
+
+dependencies {
+
+	def CUCUMBER_VERSION = '5.5.0'
+
+	compile "io.cucumber:cucumber-java:$CUCUMBER_VERSION"
+	compile "io.cucumber:cucumber-junit:$CUCUMBER_VERSION"
+	compile "io.cucumber:cucumber-picocontainer:$CUCUMBER_VERSION"
+	compile 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+}
+
+task cucumber(type: JavaExec) {
+  classpath = configurations.testCompile + sourceSets.main.output + sourceSets.test.output
+  main = 'de.test.MainCucumber'
+}
